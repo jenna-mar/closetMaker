@@ -1,0 +1,2 @@
+class Hacctype < ApplicationRecord
+end

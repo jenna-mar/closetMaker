@@ -1,0 +1,27 @@
+<h1>My Wardrobe</h1>
+
+<%= link_to 'Back to Home', root_path %><br>
+
+
+
+
+<% current_user.items.each do |i| %>
+	<div class='item_container'>
+		<% if i.img? %>
+			<%= image_tag i.img.url, :class => 'item_img' %>
+		<% end %>
+		<h2>
+			<%= i.name %>
+		</h2>
+		<p>
+			<%= i.o_name %>
+		</p>
+		<div>
+			<%= i.brand %>
+			<%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+			<%= link_to 'Delete', user_item_path(current_user, i),
+	              method: :delete,
+	              data: { confirm: 'Are you sure?' } %>
+		</div>
+	</div>
+<% end %>

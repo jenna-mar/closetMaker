@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  o_name: MyString
+  brand: MyString
+  type: 
+  color: MyString
+  p_price: 9.99
+  price_currency: MyString
+  date_p: 2018-01-20
+  date_r: 2018-01-20
+  notes: MyText
+
+two:
+  name: MyString
+  o_name: MyString
+  brand: MyString
+  type: 
+  color: MyString
+  p_price: 9.99
+  price_currency: MyString
+  date_p: 2018-01-20
+  date_r: 2018-01-20
+  notes: MyText

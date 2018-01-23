@@ -3,28 +3,29 @@
 </head>
 <body>
 	<h1>Closet Maker</h1>
-	<br>
-	<% if !current_user.nil? %>
-		<div>
-			Logged in as: <%= User.find_by(id: session[:user_id]).username %>
-		</div>
-		<%= link_to 'Add New Item', new_user_item_path(current_user) %>
-		<br>
-		<%= link_to 'My Wardrobe', user_items_path(current_user) %>
-		<br>
-		<%= link_to 'Settings', edit_user_path(current_user) %>
-		<br>
-		<%= link_to 'Log Out', logout_path, method: :delete %>
-	<% else %>
-		<%= link_to 'Log In', login_path %>
-	<% end %>
 	<h2>Featured Wardrobes</h2>
-	<div>
-		<% @users = User.all %>
-		<% @users.each do |user| %>
-		<span style="width:50%; padding:50px">
-			<%= user.username %>'s Wardrobe
-		</span>
-		<% end %>
+	<div class="wardrobes_container_container">
+		<div class="wardrobes_container">
+			<% @users = User.all %>
+			<% @users.take(4).each do |user| %>
+			<div class="user_wardrobe">
+				<%= link_to user.username.titleize + '\'s Wardrobe', user_items_path(user) %>
+				<div class="wardrobe-container">
+					<% disp_items = user.items.order(created_at: :desc).take(16) %>
+					<% disp_items.each do |item| %>
+						<span class="wardrobe-item">
+							<% if item.img? %>
+								<%= image_tag item.img.url %>
+							<% else %>
+								<span class="no_img_item">
+									<%= item.name %>
+								</span>
+							<% end %>
+						</span>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+		</div>
 	</div>
 </body>

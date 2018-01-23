@@ -13,3 +13,102 @@
  *= require_tree .
  *= require_self
  */
+
+.navbar{
+    overflow: hidden;
+    background-color: #d1e2ff;
+    text-align: right;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navbar a{
+    float: left;
+    text-align: center;
+    padding: 25px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.logo{
+    float: left;
+}
+
+.nav-content{
+    float: right;
+    padding-right: 70px;
+}
+
+.dropdown .dropbtn{
+    border: none;
+    outline: none;
+    padding: 25px;
+    background-color: inherit;
+    margin: 0;
+    font-size: 16px;
+}
+
+.dropdown .dropbtn:hover, .navbar .nav-content a:hover{
+    background-color: #477bd1;
+}
+
+.dropbtn::after{
+    content: '▼';
+    font-size: 0.8em;
+}
+
+a.add_new{
+    padding: 8px 20px;
+}
+
+.add_new{
+    border: 2px solid #477bd1;
+    border-radius: 40px;
+    margin: 15px 10px;
+}
+
+.add_new::before{
+    content: '+';
+    font-family: 'Arial';
+    font-weight: bold;
+    padding-right: 0.5em;
+}
+
+.dropdown-content{
+    display: none;
+    position: fixed;
+    min-width: 100px;
+    box-shadow: 0 8px 15px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    background-color: #fff;
+}
+
+.dropdown-content a{
+    float: none;
+    padding: 15px 30px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover{
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+.content-container{
+    margin: 100px 30px 0;
+}
+
+.options-ha-type{
+    display: none;
+}

@@ -19,8 +19,8 @@ class ItemsController < ApplicationController
 	end
 
 	def show
-		@user = User.find_by(id: session[:user_id])
-		@item = @user.items.find(params[:id])
+		@user = User.find(params[:user_id])
+		@item = Item.find(params[:id])
 	end
 
 	def edit
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 		@item = @user.items.find(params[:id])
 
 		if @item.update(item_params)
-			redirect_to user_item_path(@item)
+			redirect_to user_item_path(@user, @item)
 		else
 			render 'edit'
 		end
@@ -48,8 +48,10 @@ class ItemsController < ApplicationController
 	end
 
 	def index
-		@items = Item.all
-	end
+		@user = User.find(params[:user_id])
+		#@items = Item.order(sort_column + " " + sort_direction)
+    @items = Item.all
+  end
 
 	private
 		def item_params

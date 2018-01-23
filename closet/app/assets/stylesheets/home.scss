@@ -1,3 +1,43 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user_wardrobe{
+  padding: 15px;
+  width: 550px;
+  float: left;
+}
+
+.wardrobe-container{
+  max-width: 500px;
+  max-height: 500px;
+  border: 2px solid eee;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: center;
+  margin: 25px 0;
+  padding: 10px;
+
+  .wardrobe-item img{
+    max-height: 120px;
+    max-width: 100px;
+  }
+
+  .no_img_item{
+    height: 70px;
+    padding-top: 50px;
+    font-size: 0.8em;
+    max-width: 90px;
+    border: 1px solid black;
+    display: inline-block;
+  }
+}
+
+.wardrobes_container_container{
+  text-align: center;
+}
+
+.wardrobes_container{
+  display: inline-block;
+}

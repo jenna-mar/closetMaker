@@ -1,27 +1,79 @@
-<h1>My Wardrobe</h1>
+<% my_page = @user == current_user %>
 
-<%= link_to 'Back to Home', root_path %><br>
+<h1>
+  <% if my_page %>
+    My Wardrobe
+  <% else %>
+    <%= @user.username %>'s Wardrobe
+  <% end %>
+</h1>
 
+<div>
+  Sort By
+  <select>
+  <%= options_for_select([['Recently Added', 1], ['Oldest (Added)', 2], ['Name (Alphabetical)', 3], ['Date Received', 4],
+                          ['Date Purchased', 5], ['Price Paid (Most Expensive)', 6],  ['Price Paid (Cheapest)', 7],
+                          ['Price Paid + Fees (Most Expensive)', 8],  ['Price Paid + Fees (Cheapest)', 9],
+                          ['Date Purchased (Oldest)', 10],  ['Date Purchased (Oldest)', 11], ['Date Received (Newest)', 12],
+                          ['Date Received (Oldest)', 13]],1) %>
+  </select>
+  <select>
+    <option value="all_b">All Brands</option>
+    <%= options_for_select(Brand.all.map{|b| [b.name, (b.name.gsub(/\s+/, ""))]}) %>
+  </select>
+  <select class="options-item-type">
+    <option value="all_i">All Items</option>
+    <%= options_for_select(Type.all.map{|t| [t.name, (t.name.gsub(/[\(\)\s+]/, ""))]}) %>
+  </select>
+  <select class="options-ha-type">
+    <option></option>
+    <%= options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/[\(\)\s+]/, ""))]}) %>
+  </select>
+  <br>
+  Arrived?
+  <select>
+    <%= options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]],1) %>
+  </select>
+  <button>Submit</button>
+  <div>
+    <label for="display_img_only">Display Images Only</label>
+    <input type="checkbox" id="display_img_only">
+  </div>
+</div>
 
+<% @user.items.each do |i| %>
+  <div class='item_container'>
+	<%= link_to(user_item_path(@user, i)) do %>
+      <span class="item-contents-container">
+        <% if i.img? %>
+          <%= image_tag i.img.url, :class => 'item_img' %>
+        <% else %>
+          <div class="no_img">
+            no image
+          </div>
+        <% end %>
+        <h2>
+          <%= i.name %>
+        </h2>
+        <div>
+          <span class="subtitle">
+            <%= i.o_name %>
+          </span>
+          <br>
+          <%= i.brand %>
+          <br>
+          <%= i.color %>
+        </div>
+      </span>
+  <% end %>
+    <% if my_page %>
+      <div class="edit_options">
+          <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+        <%= link_to 'Delete', user_item_path(current_user, i),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+  </div>
 
-
-<% current_user.items.each do |i| %>
-	<div class='item_container'>
-		<% if i.img? %>
-			<%= image_tag i.img.url, :class => 'item_img' %>
-		<% end %>
-		<h2>
-			<%= i.name %>
-		</h2>
-		<p>
-			<%= i.o_name %>
-		</p>
-		<div>
-			<%= i.brand %>
-			<%= link_to 'Edit', edit_user_item_path(current_user, i) %>
-			<%= link_to 'Delete', user_item_path(current_user, i),
-	              method: :delete,
-	              data: { confirm: 'Are you sure?' } %>
-		</div>
-	</div>
 <% end %>

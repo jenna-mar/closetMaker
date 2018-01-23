@@ -1,20 +1,82 @@
-<div>
+<% my_page = @user == current_user %>
+
+<div class="show_item_container">
 	<% if @item.img? %>
 		<%= image_tag @item.img.url %>
 	<% end %>
+
 	<h2>
-		<%= @item.name %>
+		<% unless my_page %>
+      <%= @user.username.titleize %>'s<br>
+    <% end %>
+    <% if @item.ref_url %>
+			<%= link_to @item.name, @item.ref_url, :target => "_blank" %>
+		<% else %>
+			<%= @item.ref_url %>
+		<% end %>
 	</h2>
-	<p>
-		<%= @item.o_name %>
-	</p>
 	<div>
-		<%= @item.brand %>
-	</div>
-	<%= link_to 'Edit', edit_user_item_path(current_user, @item) %><br>
-	<%= link_to 'Delete', user_item_path(current_user, @item),
-		method: :delete,
-		data: {confirm: 'Are you sure?'}
-	 %><br>
-	<%= link_to 'Back', user_items_path(current_user) %><br>
+		<% if @item.o_name %>
+			<div class="subtitle">
+				<%= @item.o_name %>
+			</div>
+		<% end %>
+		<% if @item.brand %>
+			<div>
+				<%= @item.brand %>
+			</div>
+		<% end %>
+		<div>
+			<%= @item.item_type %>
+			<% if @item.item_type == "Hair Accessory" %>
+					: <%= @item.ha_type %>
+			<% end %>
+		</div>
+		<% if @item.color %>
+			<div>
+				<%= @item.color %>
+			</div>
+		<% end %>
+    <% if my_page %>
+      <br>
+      <% if @item.p_price %>
+        <div>
+          <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
+          Price paid: <%= item_currency %><%= @item.p_price %> (<%= @item.price_currency %>)
+        </div>
+      <% end %>
+      <% if @item.f_price %>
+        <div>
+          Price with fees, shipping: <%= item_currency %><%= @item.f_price %> (<%= @item.price_currency %>)
+        </div>
+      <% end %>
+      <% if @item.date_p %>
+        <div>
+          Date purchased: <%= @item.date_p %>
+        </div>
+      <% end %>
+      <% if @item.date_r %>
+        <div>
+          Date Received: <%= @item.date_r %>
+        </div>
+      <% end %>
+      <% unless @item.notes.blank? %>
+        <div class="notes">
+          <b>Notes:</b> <br><%= @item.notes %>
+        </div>
+      <% end %>
+  </div>
+      <div class="item-edit-settings">
+        <%= link_to 'Edit', edit_user_item_path(current_user, @item) %>
+        <%= link_to 'Delete', user_item_path(current_user, @item),
+          method: :delete,
+          data: {confirm: 'Are you sure?'}
+         %>
+      </div>
+  <% else %>
+    <div class="item-edit-settings">
+      <%= link_to 'Back', user_items_path(@user) %>
+    </div>
+  </div>
+  <% end %>
 </div>

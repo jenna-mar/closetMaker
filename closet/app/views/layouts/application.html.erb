@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Closet</title>
+    <title>Closet Maker</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,46 @@
   </head>
 
   <body>
+    <header class="navbar">
+      <div class="logo">
+        <%= link_to "Closet", root_path, id: "logo" %>
+      </div>
+      <div class="nav-content">
+        <% if !current_user.nil? %>
+          <% unless current_page?(new_user_item_path(current_user)) %>
+            <%= link_to 'Add New Item', new_user_item_path(current_user), :class => 'add_new' %>
+          <% end %>
+          <% unless current_page?(user_items_path(current_user)) %>
+            <%= link_to 'My Wardrobe', user_items_path(current_user) %>
+          <% end %>
+            <div class="dropdown">
+              <button class="dropbtn">
+                <%= User.find_by(id: session[:user_id]).username.titleize %>
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <%= link_to 'Settings', edit_user_path(current_user) %>
+                <%= link_to 'Log Out', logout_path, method: :delete %>
+              </div>
+            </div>
+        <% else %>
+          <%= link_to 'Log In', login_path %>
+        <% end %>
+      </div>
+    </header>
+    <div class="content-container">
     <%= yield %>
+    </div>
   </body>
+  <!-- temporarily put script here. MOVE ASAP -->
+  <script>
+      $("select.options-item-type").change(function(){
+          if ($(this).find(":selected").text() === "Hair Accessory"){
+              $(".options-ha-type").show();
+          }
+          else if ($(".options-ha-type").is(':visible')) {
+              $(".options-ha-type").hide();
+          }
+      });
+  </script>
 </html>

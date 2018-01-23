@@ -46,11 +46,13 @@
 
   <p>
     <%= f.label :item_type, 'Item Type' %><br>
-    <%= f.collection_select :item_type, Type.all, :name, :name %>
+    <%= f.collection_select :item_type, Type.all, :name, :name, {}, {:class => "options-item-type"} %>
     
     <br>
-    <%= f.label :ha_type, 'Hair Accessory Type' %><br>
-    <%= f.collection_select :ha_type, Hacctype.all, :name, :name, :include_blank => true %>
+    <span class="options-ha-type">
+      <%= f.label :ha_type, 'Hair Accessory Type' %><br>
+      <%= f.collection_select :ha_type, Hacctype.all, :name, :name, :include_blank => true %>
+    </span>
   </p>
 
   <p class="colorway">

@@ -17,7 +17,7 @@
         :selected => params[:item_type]), :include_blank => 'All Item Types', :class => "options-item-type") %>
     <%= select_tag("ha_type", options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/\s+/, "+"))]},
         :selected => params[:item_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
-    <%= select_tag("column", options_for_select([['Recently Added', 'created_at+asc'], ['Oldest (Added)', 'created_at+desc'],
+    <%= select_tag("column", options_for_select([['Oldest (Added)', 'created_at+asc'], ['Recently Added', 'created_at+desc'],
          ['Name (Alphabetical)', 'name'], ['Date Received (Newest)', 'date_r+desc'],
          ['Date Received (Oldest)', 'date_r+asc'], ['Date Purchased (Newest)', 'date_p+desc'],
          ['Date Purchased (Oldest)', 'date_p+asc'], ['Price Paid (Most Expensive)', 'p_price+desc'],
@@ -26,15 +26,17 @@
     <br>
     Arrived?
     <%= select_tag("arrived", options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]], :selected => params[:arrived])) %>
+    <br>
+    <%= label_tag "img", 'Image-only display'%>
+    <% if params[:img] == '1' %>
+    <% img_option = true %>
+    <% else %>
+    <% img_option = false %>
+    <% end %>
+    <%= check_box_tag("img", '1', img_option) %><br>
     <%= submit_tag "Submit", :class => 'submit_sort' %>
   <% end %>
   <!--
-  <br>
-  Arrived?
-  <select>
-    <%= options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]],1) %>
-  </select>
-  <button>Submit</button>
   <div>
     <label for="display_img_only">Display Images Only</label>
     <input type="checkbox" id="display_img_only">
@@ -42,9 +44,17 @@
 </div>
 
 <% @items.each do |i| %>
-  <div class='item_container'>
+  <div class='item_container'
+       <% if params[:img] == '1' %>
+       style="margin:5px"
+       <% end %>
+  >
 	<%= link_to(user_item_path(@user, i)) do %>
-      <span class="item-contents-container">
+      <span class="item-contents-container"
+        <% if params[:img] == '1' %>
+          style="min-height:auto;min-width:auto;padding:10px"
+        <% end %>
+      >
         <% if i.img? %>
           <%= image_tag i.img.url, :class => 'item_img' %>
         <% else %>
@@ -52,27 +62,31 @@
             no image
           </div>
         <% end %>
-        <h2>
-          <%= i.name %>
-        </h2>
-        <div>
-          <span class="subtitle">
-            <%= i.o_name %>
-          </span>
-          <br>
-          <%= i.brand %>
-          <br>
-          <%= i.color %>
+        <% if params[:img] != '1' %>
+          <h2>
+            <%= i.name %>
+          </h2>
+          <div>
+            <span class="subtitle">
+              <%= i.o_name %>
+            </span>
+            <br>
+            <%= i.brand %>
+            <br>
+            <%= i.color %>
+          </div>
+        </span>
+        <% end %>
+    <% end %>
+    <% if params[:img] != '1' %>
+      <% if my_page %>
+        <div class="edit_options">
+            <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+          <%= link_to 'Delete', user_item_path(current_user, i),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
         </div>
-      </span>
-  <% end %>
-    <% if my_page %>
-      <div class="edit_options">
-          <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
-        <%= link_to 'Delete', user_item_path(current_user, i),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-      </div>
+      <% end %>
     <% end %>
   </div>
 

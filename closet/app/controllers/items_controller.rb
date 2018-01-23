@@ -90,6 +90,14 @@ class ItemsController < ApplicationController
     @items = items
   end
 
+  def my_wardrobe
+    if current_user
+      redirect_to user_items_path(current_user)
+    else
+      redirect_to root_path
+    end
+  end
+
 	private
 		def item_params
 			params.require(:item).permit(:name, :img, :ref_url, :o_name, 

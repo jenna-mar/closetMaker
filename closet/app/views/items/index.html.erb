@@ -10,25 +10,25 @@
 
 <div>
   Sort By
-  <select>
-  <%= options_for_select([['Recently Added', 1], ['Oldest (Added)', 2], ['Name (Alphabetical)', 3], ['Date Received', 4],
-                          ['Date Purchased', 5], ['Price Paid (Most Expensive)', 6],  ['Price Paid (Cheapest)', 7],
-                          ['Price Paid + Fees (Most Expensive)', 8],  ['Price Paid + Fees (Cheapest)', 9],
-                          ['Date Purchased (Oldest)', 10],  ['Date Purchased (Oldest)', 11], ['Date Received (Newest)', 12],
-                          ['Date Received (Oldest)', 13]],1) %>
-  </select>
-  <select>
-    <option value="all_b">All Brands</option>
-    <%= options_for_select(Brand.all.map{|b| [b.name, (b.name.gsub(/\s+/, ""))]}) %>
-  </select>
-  <select class="options-item-type">
-    <option value="all_i">All Items</option>
-    <%= options_for_select(Type.all.map{|t| [t.name, (t.name.gsub(/[\(\)\s+]/, ""))]}) %>
-  </select>
-  <select class="options-ha-type">
-    <option></option>
-    <%= options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/[\(\)\s+]/, ""))]}) %>
-  </select>
+  <%= form_tag(user_items_path, :method => "get") do %>
+    <%= select_tag("brand", options_for_select(Brand.all.map{|b| [b.name, (b.name.gsub(/\s+/, "+"))]},
+        :selected => params[:brand]), :include_blank => 'All Brands ') %>
+    <%= select_tag("item_type", options_for_select(Type.all.map{|t| [t.name, (t.name.gsub(/\s+/, "+"))]},
+        :selected => params[:item_type]), :include_blank => 'All Item Types', :class => "options-item-type") %>
+    <%= select_tag("ha_type", options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/\s+/, "+"))]},
+        :selected => params[:item_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
+    <%= select_tag("column", options_for_select([['Recently Added', 'created_at+asc'], ['Oldest (Added)', 'created_at+desc'],
+         ['Name (Alphabetical)', 'name'], ['Date Received (Newest)', 'date_r+desc'],
+         ['Date Received (Oldest)', 'date_r+asc'], ['Date Purchased (Newest)', 'date_p+desc'],
+         ['Date Purchased (Oldest)', 'date_p+asc'], ['Price Paid (Most Expensive)', 'p_price+desc'],
+         ['Price Paid (Cheapest)', 'p_price+asc'], ['Price Paid + Fees (Most Expensive)', 'f_price+desc'],
+         ['Price Paid + Fees (Cheapest)', 'f_price+asc']], :selected => params[:column])) %>
+    <br>
+    Arrived?
+    <%= select_tag("arrived", options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]], :selected => params[:arrived])) %>
+    <%= submit_tag "Submit", :class => 'submit_sort' %>
+  <% end %>
+  <!--
   <br>
   Arrived?
   <select>
@@ -38,10 +38,10 @@
   <div>
     <label for="display_img_only">Display Images Only</label>
     <input type="checkbox" id="display_img_only">
-  </div>
+  </div>-->
 </div>
 
-<% @user.items.each do |i| %>
+<% @items.each do |i| %>
   <div class='item_container'>
 	<%= link_to(user_item_path(@user, i)) do %>
       <span class="item-contents-container">

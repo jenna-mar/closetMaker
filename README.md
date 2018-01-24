@@ -3,14 +3,18 @@
 Wardrobe archiving application for Japanese fashion items.
 Available Features:
 * Detailed archiving of wardrobe items
+* Sorting of wardrobe items by brand, type, dates, etc...
+* Grabbing item data from lolibrary to automatically fill item fields 
+* Image-only mode for wardrobe overview
 
 To be added:
-* Grabbing item data from lolibrary, brand shop websites, etc.
-* Sorting Wardrobe items
+* Grabbing item data from brand shop websites, etc.
 * Separate Tab for items that have not arrived
-* Styling
+* Better Styling
 
 ## Getting started
+
+This is just a rough skeleton guide and will be updated later.
 
 To get started with the app, clone the repo and then install the needed gems:
 

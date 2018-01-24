@@ -98,6 +98,23 @@ class ItemsController < ApplicationController
     end
   end
 
+  def autofill
+    url = params[:url]
+    # open URL for scraping
+    doc = Nokogiri::HTML(open(url))
+
+    data = doc.css(".list-group-item.attribute .description a")
+    # get item attributes
+    # note for name, there is some leading whitespace so we use strip
+    name = doc.css(".text-primary").xpath('text()').to_s.strip
+    o_name = doc.css(".text-muted").xpath('text()').to_s
+    brand = data[0].xpath('text()').to_s
+    item_type = data[1].xpath('text()').to_s
+    # return results in json
+    test = {name: name, o_name: o_name, brand: brand, item_type: item_type}
+    render json: test
+  end
+
 	private
 		def item_params
 			params.require(:item).permit(:name, :img, :ref_url, :o_name, 

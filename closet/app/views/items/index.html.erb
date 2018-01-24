@@ -36,13 +36,9 @@
     <%= check_box_tag("img", '1', img_option) %><br>
     <%= submit_tag "Submit", :class => 'submit_sort' %>
   <% end %>
-  <!--
-  <div>
-    <label for="display_img_only">Display Images Only</label>
-    <input type="checkbox" id="display_img_only">
-  </div>-->
 </div>
 
+<div class="items_container">
 <% @items.each do |i| %>
   <div class='item_container'
        <% if params[:img] == '1' %>
@@ -89,5 +85,5 @@
       <% end %>
     <% end %>
   </div>
-
 <% end %>
+</div>

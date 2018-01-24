@@ -22,9 +22,9 @@
   <p>
     <%= f.label :ref_url, 'Reference Link' %><br>
     <%= f.url_field :ref_url %>
-    <%= content_tag(:button, "Autofill", :type=>:button)%>
+    <%= content_tag(:button, "Autofill", :type=>:button, :onclick => 'getReflinkData()')%>
     <span style="font-size: 80%;max-width:100px">
-      Automatically fill input fields with data from Lolibrary or AP's online shop.
+      Automatically fill input fields with data from Lolibrary.
     </span>
   </p>
  

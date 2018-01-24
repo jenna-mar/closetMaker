@@ -34,30 +34,30 @@
 		</div>
 		<% if @item.color %>
 			<div>
-				<%= @item.color %>
+				<%= @item.color.titleize %>
 			</div>
 		<% end %>
     <% if my_page %>
+      <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
       <br>
       <% if @item.p_price %>
         <div>
-          <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
-          Price paid: <%= item_currency %><%= @item.p_price %> (<%= @item.price_currency %>)
+          Price paid: <%= item_currency %><%= trim(@item.p_price) %> (<%= @item.price_currency %>)
         </div>
       <% end %>
       <% if @item.f_price %>
         <div>
-          Price with fees, shipping: <%= item_currency %><%= @item.f_price %> (<%= @item.price_currency %>)
+          Price with fees, shipping: <%= item_currency %><%= trim @item.f_price %> (<%= @item.price_currency %>)
         </div>
       <% end %>
       <% if @item.date_p %>
         <div>
-          Date purchased: <%= @item.date_p %>
+          Date purchased: <%= @item.date_p.to_s(:rfc822) %>
         </div>
       <% end %>
       <% if @item.date_r %>
         <div>
-          Date Received: <%= @item.date_r %>
+          Date Received: <%= @item.date_r.to_formatted_s(:rfc822) %>
         </div>
       <% end %>
       <% unless @item.notes.blank? %>

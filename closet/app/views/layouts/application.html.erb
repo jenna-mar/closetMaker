@@ -42,6 +42,7 @@
   </body>
   <!-- temporarily put script here. MOVE ASAP -->
   <script>
+      // Make hair accessories selector appear when HA option is selected in form(s)
       $("select.options-item-type").change(function(){
           if ($(this).find(":selected").text() === "Hair Accessory"){
               $(".options-ha-type").show();
@@ -50,5 +51,47 @@
               $(".options-ha-type").hide();
           }
       });
+
+      // Gets data from provided reference URL to automatically fill some fields
+      function getReflinkData(){
+          url = $('#item_ref_url').val();
+          if (url.substr(0, 21) === "https://lolibrary.org") {
+              // disable fields while making request
+              $('#new_item :input').prop('disabled', true);
+              $.ajax({
+                  type: "GET",
+                  url: "/requests/autofill/",
+                  data: {"url": $('#item_ref_url').val()},
+                  success: function (data) {
+                      $('#item_name').val(data.name);
+                      $('#item_o_name').val(data.o_name);
+                      $('#item_brand').val(data.brand);
+
+                      if (data.item_type === "OP") {
+                          $('#item_item_type').val("One Piece");
+                      }
+                      else if (data.item_type === "JSK") {
+                          $('#item_item_type').val("Jumperskirt");
+                      }
+                      else if (data.item_type === "Hair Accessories") {
+                          $('#item_item_type').val("Hair Accessory");
+                      }
+                      else if (data.item_type === "Accessories") {
+                          $('#item_item_type').val("Accessory (other)");
+                      }
+                      else if ((data.item_type !== "Socks" || data.item_type !== "Pants" || data.item_type !== "Bloomers")
+                          && (data.item_type).substr(-1) === 's') {
+                          $('#item_item_type').val(data.item_type.slice(0, -1));
+                      }
+                      else {
+                          $('#item_item_type').val(data.item_type);
+                      }
+                      // re-enable fields
+                      $('#new_item :input').prop('disabled', false);
+                  }
+              });
+              return false;
+          }
+      }
   </script>
 </html>

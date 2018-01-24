@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   get '/my_wardrobe', to: 'items#my_wardrobe'
+
+  get '/requests/autofill', to: 'items#autofill'
 end

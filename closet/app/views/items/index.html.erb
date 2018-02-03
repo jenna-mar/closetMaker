@@ -1,4 +1,5 @@
 <% my_page = @user == current_user %>
+<% type_list_options = Type.pluck(:name).unshift('Main Pieces') %>
 
 <h1>
   <% if my_page %>
@@ -13,10 +14,10 @@
   <%= form_tag(user_items_path, :method => "get") do %>
     <%= select_tag("brand", options_for_select(Brand.all.map{|b| [b.name, (b.name.gsub(/\s+/, "+"))]},
         :selected => params[:brand]), :include_blank => 'All Brands ') %>
-    <%= select_tag("item_type", options_for_select(Type.all.map{|t| [t.name, (t.name.gsub(/\s+/, "+"))]},
+    <%= select_tag("item_type", options_for_select(type_list_options.map{|t| [t, (t.gsub(/\s+/, "+"))]},
         :selected => params[:item_type]), :include_blank => 'All Item Types', :class => "options-item-type") %>
     <%= select_tag("ha_type", options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/\s+/, "+"))]},
-        :selected => params[:item_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
+        :selected => params[:ha_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
     <%= select_tag("column", options_for_select([['Oldest (Added)', 'created_at+asc'], ['Recently Added', 'created_at+desc'],
          ['Name (Alphabetical)', 'name'], ['Date Received (Newest)', 'date_r+desc'],
          ['Date Received (Oldest)', 'date_r+asc'], ['Date Purchased (Newest)', 'date_p+desc'],
@@ -36,6 +37,10 @@
     <%= check_box_tag("img", '1', img_option) %><br>
     <%= submit_tag "Submit", :class => 'submit_sort' %>
   <% end %>
+</div>
+
+<div>
+  <%= @items.length %> results found.
 </div>
 
 <div class="items_container">

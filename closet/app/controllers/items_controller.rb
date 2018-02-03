@@ -70,8 +70,12 @@ class ItemsController < ApplicationController
     end
     # filter for selected item type (if applicable)
     unless params[:item_type].blank?
-      i_type = params[:item_type].gsub(/\+/, " ")
-      items = items.where('item_type = ?', i_type)
+      if params[:item_type] == 'Main+Pieces'
+        items = items.where('item_type = "One Piece"').or(items.where('item_type = "Jumperskirt"').or(items.where('item_type = "Skirt"')))
+      else
+        i_type = params[:item_type].gsub(/\+/, " ")
+        items = items.where('item_type = ?', i_type)
+      end
     end
     # filter for selected hair accessory type (if applicable)
     unless params[:ha_type].blank?

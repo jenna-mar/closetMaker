@@ -4,7 +4,7 @@ Wardrobe archiving application for Japanese fashion items.
 Available Features:
 * Detailed archiving of wardrobe items
 * Sorting of wardrobe items by brand, type, dates, etc...
-* Grabbing item data from lolibrary to automatically fill item fields 
+* Grabbing item data from [Lolibrary](https://lolibrary.org) to automatically fill item fields 
 * Image-only mode for wardrobe overview
 
 To be added:

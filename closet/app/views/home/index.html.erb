@@ -11,7 +11,7 @@
 			<div class="user_wardrobe">
 				<%= link_to user.username.titleize + '\'s Wardrobe', user_items_path(user) %>
 				<div class="wardrobe-container">
-					<% disp_items = user.items.order(created_at: :desc).take(16) %>
+					<% disp_items = user.items.order(created_at: :desc).take(15) %>
 					<% disp_items.each do |item| %>
 						<span class="wardrobe-item">
 							<% if item.img? %>

@@ -39,13 +39,17 @@ $gray: #707070;
 
 .item-contents-container{
   min-width: 250px;
-  max-width: 350px;
+  max-width: 330px;
   min-height: 360px;
   padding: 15px;
   float: left;
 
   a{
     text-decoration: none;
+  }
+
+  .subtitle{
+    font-size: 70%;
   }
 
 }

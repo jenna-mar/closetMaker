@@ -32,6 +32,11 @@
 					: <%= @item.ha_type %>
 			<% end %>
 		</div>
+		<% if @item.year %>
+			<div>
+				Release Year: <%= @item.year %>
+			</div>
+		<% end %>
 		<% if @item.color %>
 			<div>
 				<%= @item.color.titleize %>

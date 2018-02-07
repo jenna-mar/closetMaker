@@ -23,7 +23,8 @@
          ['Date Received (Oldest)', 'date_r+asc'], ['Date Purchased (Newest)', 'date_p+desc'],
          ['Date Purchased (Oldest)', 'date_p+asc'], ['Price Paid (Most Expensive)', 'p_price+desc'],
          ['Price Paid (Cheapest)', 'p_price+asc'], ['Price Paid + Fees (Most Expensive)', 'f_price+desc'],
-         ['Price Paid + Fees (Cheapest)', 'f_price+asc']], :selected => params[:column])) %>
+         ['Price Paid + Fees (Cheapest)', 'f_price+asc'], ['Release Year (Newest)', 'year+desc'],
+         ['Release Year (Oldest)', 'year+asc']], :selected => params[:column])) %>
     <br>
     Arrived?
     <%= select_tag("arrived", options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]], :selected => params[:arrived])) %>
@@ -74,7 +75,7 @@
             <br>
             <%= i.brand %>
             <br>
-            <%= i.color %>
+            <%= i.color.titleize %>
           </div>
         </span>
         <% end %>

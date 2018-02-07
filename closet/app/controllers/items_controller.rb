@@ -107,22 +107,24 @@ class ItemsController < ApplicationController
     # open URL for scraping
     doc = Nokogiri::HTML(open(url))
 
-    data = doc.css(".list-group-item.attribute .description a")
+    data = doc.css(".list-group-item.attribute .description")
     # get item attributes
     # note for name, there is some leading whitespace so we use strip
     name = doc.css(".text-primary").xpath('text()').to_s.strip
     o_name = doc.css(".text-muted").xpath('text()').to_s
-    brand = data[0].xpath('text()').to_s
-    item_type = data[1].xpath('text()').to_s
+    brand = data.css("a")[0].xpath('text()').to_s
+    item_type = data.css("a")[1].xpath('text()').to_s
+    year = data[2].xpath('text()').to_s.to_i
     # return results in json
-    test = {name: name, o_name: o_name, brand: brand, item_type: item_type}
-    render json: test
+    results = {name: name, o_name: o_name, brand: brand, item_type: item_type, year: year}
+    render json: results
   end
 
 	private
 		def item_params
 			params.require(:item).permit(:name, :img, :ref_url, :o_name, 
-				:brand, :item_type, :ha_type, :color, :p_price, :f_price, :price_currency, :date_p, :date_r, :notes, :notarrived)
+				:brand, :item_type, :ha_type, :color, :p_price, :f_price,
+        :price_currency, :date_p, :date_r, :notes, :notarrived, :year)
     end
 
 		def logged_in_user

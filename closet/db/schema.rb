@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122025211) do
+ActiveRecord::Schema.define(version: 20180207100257) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20180122025211) do
     t.datetime "img_updated_at"
     t.integer  "user_id"
     t.boolean  "notarrived"
+    t.integer  "year"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 

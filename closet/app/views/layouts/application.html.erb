@@ -63,9 +63,11 @@
                   url: "/requests/autofill/",
                   data: {"url": $('#item_ref_url').val()},
                   success: function (data) {
+                      console.log(data);
                       $('#item_name').val(data.name);
                       $('#item_o_name').val(data.o_name);
                       $('#item_brand').val(data.brand);
+                      $('#item_year').val(data.year);
 
                       if (data.item_type === "OP") {
                           $('#item_item_type').val("One Piece");

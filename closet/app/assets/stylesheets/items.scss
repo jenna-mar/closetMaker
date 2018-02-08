@@ -86,4 +86,22 @@ $gray: #707070;
   .item-edit-settings{
     padding: 15px 0;
   }
+
+  p{
+    margin: 5px 0;
+  }
+}
+
+.form_container{
+  text-align: center;
+}
+
+.edit_item, .new_item{
+  display: inline-block;
+  text-align: left;
+}
+
+#item_notes{
+  min-width: 300px;
+  min-height: 80px;
 }

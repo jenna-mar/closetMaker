@@ -15,6 +15,11 @@
 			<%= @item.name %>
 		<% end %>
 	</h2>
+  <% if @item.notarrived %>
+    <div style="color: red;text-align: right">
+      *Not Arrived Yet
+    </div>
+  <% end %>
 	<div>
 		<% if @item.o_name %>
 			<div class="subtitle">
@@ -67,7 +72,7 @@
       <% end %>
       <% unless @item.notes.blank? %>
         <div class="notes">
-          <b>Notes:</b> <br><%= @item.notes %>
+          <b>Notes:</b> <%= simple_format(@item.notes) %>
         </div>
       <% end %>
   </div>

@@ -62,8 +62,7 @@
                   type: "GET",
                   url: "/requests/autofill/",
                   data: {"url": $('#item_ref_url').val()},
-                  success: function (data) {
-                      console.log(data);
+                  success: function (data) {              
                       $('#item_name').val(data.name);
                       $('#item_o_name').val(data.o_name);
                       $('#item_brand').val(data.brand);
@@ -81,12 +80,12 @@
                       else if (data.item_type === "Accessories") {
                           $('#item_item_type').val("Accessory (other)");
                       }
-                      else if ((data.item_type !== "Socks" || data.item_type !== "Pants" || data.item_type !== "Bloomers")
-                          && (data.item_type).substr(-1) === 's') {
+                      else if ((data.item_type !== "Socks" && data.item_type !== "Pants" && data.item_type !== "Bloomers")
+                          && (data.item_type).substr(-1) === 's') {                          
                           $('#item_item_type').val(data.item_type.slice(0, -1));
                       }
                       else {
-                          $('#item_item_type').val(data.item_type);
+                          $('#item_item_type').val(data.item_type);                        
                       }
                       // re-enable fields
                       $('#new_item :input').prop('disabled', false);

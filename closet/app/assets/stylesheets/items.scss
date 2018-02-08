@@ -5,11 +5,21 @@
 $blue: #d1e2ff;
 $gray: #707070;
 
+.items_container{
+  text-align: center;
+  display: inline-block;
+}
+
 .item_container{
-  float: left;
-  margin: 15px;
+  display: inline-block;
+  margin: 15px 10px;
   border: 2px solid $blue;
   text-align: center;
+
+  &:hover{
+    background-color: #edf4ff;
+    transition: 200ms;
+  }
 
   img{
     height: 200px;
@@ -22,6 +32,9 @@ $gray: #707070;
 
   a{
     text-decoration: none;
+    &:visited{
+      color: inherit;
+    }
   }
 
   .no_img{
@@ -31,6 +44,12 @@ $gray: #707070;
     margin: auto;
     padding-top: 85px;
   }
+
+  .edit_options{
+    a{
+      color: #477bd1;
+    }
+  }
 }
 
 .subtitle{
@@ -38,15 +57,11 @@ $gray: #707070;
 }
 
 .item-contents-container{
-  min-width: 250px;
+  min-width: 210px;
   max-width: 330px;
   min-height: 360px;
-  padding: 15px;
+  padding: 15px 15px 0;
   float: left;
-
-  a{
-    text-decoration: none;
-  }
 
   .subtitle{
     font-size: 70%;
@@ -57,8 +72,8 @@ $gray: #707070;
 .show_item_container{
   max-width: 500px;
   margin: auto;
-  text-align: center;
   margin-bottom: 100px;
+  text-align: center;
 
   img{
     max-width: 500px;
@@ -71,8 +86,4 @@ $gray: #707070;
   .item-edit-settings{
     padding: 15px 0;
   }
-}
-
-.wardrobe-item{
-  float: left;
 }

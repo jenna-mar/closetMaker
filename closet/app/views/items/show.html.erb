@@ -9,10 +9,10 @@
 		<% unless my_page %>
       <%= @user.username.titleize %>'s<br>
     <% end %>
-    <% if @item.ref_url %>
+    <% if not @item.ref_url.blank? %>
 			<%= link_to @item.name, @item.ref_url, :target => "_blank" %>
 		<% else %>
-			<%= @item.ref_url %>
+			<%= @item.name %>
 		<% end %>
 	</h2>
 	<div>

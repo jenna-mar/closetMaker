@@ -19,9 +19,12 @@
   margin: 25px 0;
   padding: 10px;
 
-  .wardrobe-item img{
-    max-height: 120px;
-    max-width: 100px;
+  .wardrobe-item {
+    display: inline-block;
+    img {
+      max-height: 120px;
+      // max-width: 100px;
+    }
   }
 
   .no_img_item{

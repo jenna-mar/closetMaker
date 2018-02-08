@@ -95,5 +95,30 @@
               return false;
           }
       }
+
+      function changeImgMode(){
+          if ($('#img').prop('checked')){
+              $('.item-contents-container').css({
+                  'min-height': "auto",
+                  'min-width': "auto",
+                  'padding': "10px"
+              });
+              $('.item_container').css({'margin': "5px"});
+              $('.item_info').hide();
+              $('.edit_options').hide();
+          }
+          else {
+              $('.item-contents-container').removeAttr('style');
+              $('.item_container').removeAttr('style');
+              $('.item_info').show();
+              $('.edit_options').show();
+          }
+      }
+
+      $("#img").change(function() {
+          changeImgMode();
+      });
+
+      $(document).ready(changeImgMode());
   </script>
 </html>

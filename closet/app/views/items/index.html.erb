@@ -30,12 +30,7 @@
     <%= select_tag("arrived", options_for_select([['Both', 1], ['Arrived', 2], ['Not Arrived', 3]], :selected => params[:arrived])) %>
     <br>
     <%= label_tag "img", 'Image-only display'%>
-    <% if params[:img] == '1' %>
-    <% img_option = true %>
-    <% else %>
-    <% img_option = false %>
-    <% end %>
-    <%= check_box_tag("img", '1', img_option) %><br>
+    <%= check_box_tag("img", '1', params[:img]) %><br>
     <%= submit_tag "Submit", :class => 'submit_sort' %>
   <% end %>
 </div>
@@ -46,49 +41,39 @@
 
 <div class="items_container">
 <% @items.each do |i| %>
-  <div class='item_container'
-       <% if params[:img] == '1' %>
-       style="margin:5px"
-       <% end %>
-  >
-	<%= link_to(user_item_path(@user, i)) do %>
-      <span class="item-contents-container"
-        <% if params[:img] == '1' %>
-          style="min-height:auto;min-width:auto;padding:10px"
-        <% end %>
-      >
-        <% if i.img? %>
-          <%= image_tag i.img.url, :class => 'item_img' %>
-        <% else %>
-          <div class="no_img">
-            no image
-          </div>
-        <% end %>
-        <% if params[:img] != '1' %>
-          <h2>
-            <%= i.name %>
-          </h2>
-          <div>
-            <span class="subtitle">
-              <%= i.o_name %>
-            </span>
-            <br>
-            <%= i.brand %>
-            <br>
-            <%= i.color.titleize %>
-          </div>
+  <div class='item_container'>
+    <%= link_to(user_item_path(@user, i)) do %>
+        <span class="item-contents-container">
+          <% if i.img? %>
+            <%= image_tag i.img.url, :class => 'item_img' %>
+          <% else %>
+            <div class="no_img">
+              no image
+            </div>
+          <% end %>
+          <span class="item_info">
+            <h2>
+              <%= i.name %>
+            </h2>
+            <div>
+              <span class="subtitle">
+                <%= i.o_name %>
+              </span>
+              <br>
+              <%= i.brand %>
+              <br>
+              <%= i.color.titleize %>
+            </div>
+          </span>
         </span>
-        <% end %>
     <% end %>
-    <% if params[:img] != '1' %>
-      <% if my_page %>
-        <div class="edit_options">
-            <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
-          <%= link_to 'Delete', user_item_path(current_user, i),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
-        </div>
-      <% end %>
+    <% if my_page %>
+      <div class="edit_options">
+          <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+        <%= link_to 'Delete', user_item_path(current_user, i),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </div>
     <% end %>
   </div>
 <% end %>

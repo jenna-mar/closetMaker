@@ -43,6 +43,7 @@
   <!-- temporarily put script here. MOVE ASAP -->
   <script>
       // Make hair accessories selector appear when HA option is selected in form(s)
+
       $("select.options-item-type").change(function(){
           if ($(this).find(":selected").text() === "Hair Accessory"){
               $(".options-ha-type").show();
@@ -68,25 +69,31 @@
                       $('#item_brand').val(data.brand);
                       $('#item_year').val(data.year);
 
-                      if (data.item_type === "OP") {
-                          $('#item_item_type').val("One Piece");
-                      }
-                      else if (data.item_type === "JSK") {
-                          $('#item_item_type').val("Jumperskirt");
-                      }
-                      else if (data.item_type === "Hair Accessories") {
+                      if (data.item_type === "Hair Accessories") {
                           $('#item_item_type').val("Hair Accessory");
-                      }
-                      else if (data.item_type === "Accessories") {
-                          $('#item_item_type').val("Accessory (other)");
-                      }
-                      else if ((data.item_type !== "Socks" && data.item_type !== "Pants" && data.item_type !== "Bloomers")
-                          && (data.item_type).substr(-1) === 's') {                          
-                          $('#item_item_type').val(data.item_type.slice(0, -1));
+                          $(".options-ha-type").show();
                       }
                       else {
-                          $('#item_item_type').val(data.item_type);                        
+                          $(".options-ha-type").hide();
+
+                          if (data.item_type === "OP") {
+                              $('#item_item_type').val("One Piece");
+                          }
+                          else if (data.item_type === "JSK") {
+                              $('#item_item_type').val("Jumperskirt");
+                          }
+                          else if (data.item_type === "Accessories") {
+                              $('#item_item_type').val("Accessory (other)");
+                          }
+                          else if ((data.item_type !== "Socks" && data.item_type !== "Pants" && data.item_type !== "Bloomers")
+                              && (data.item_type).substr(-1) === 's') {
+                              $('#item_item_type').val(data.item_type.slice(0, -1));
+                          }
+                          else {
+                              $('#item_item_type').val(data.item_type);
+                          }
                       }
+
                       // re-enable fields
                       $('#new_item :input').prop('disabled', false);
                   }

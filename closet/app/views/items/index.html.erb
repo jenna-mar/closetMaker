@@ -1,5 +1,5 @@
 <% my_page = @user == current_user %>
-<% type_list_options = Type.pluck(:name).unshift('Main Pieces') %>
+<% type_list_options = ['Clothes', 'Main Pieces'] + Type.pluck(:name) %>
 
 <h1>
   <% if my_page %>
@@ -18,7 +18,7 @@
         :selected => params[:item_type]), :include_blank => 'All Item Types', :class => "options-item-type") %>
     <%= select_tag("ha_type", options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/\s+/, "+"))]},
         :selected => params[:ha_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
-    <%= select_tag("column", options_for_select([['Oldest (Added)', 'created_at+asc'], ['Recently Added', 'created_at+desc'],
+    <%= select_tag("column", options_for_select([['Recently Added', 'created_at+desc'], ['Oldest (Added)', 'created_at+asc'],
          ['Name (Alphabetical)', 'name'], ['Date Received (Newest)', 'date_r+desc'],
          ['Date Received (Oldest)', 'date_r+asc'], ['Date Purchased (Newest)', 'date_p+desc'],
          ['Date Purchased (Oldest)', 'date_p+asc'], ['Price Paid (Most Expensive)', 'p_price+desc'],
@@ -42,7 +42,7 @@
 <div class="items_container">
 <% @items.each do |i| %>
   <div class='item_container'>
-    <%= link_to(user_item_path(@user, i)) do %>
+    <%= link_to(user_item_path(@user, i), target: :_blank) do %>
         <span class="item-contents-container">
           <% if i.img? %>
             <%= image_tag i.img.url, :class => 'item_img' %>

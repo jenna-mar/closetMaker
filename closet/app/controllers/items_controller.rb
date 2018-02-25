@@ -55,7 +55,9 @@ class ItemsController < ApplicationController
 
     # order results, default is ASC
     # if sorting by price, sort by currency first
-    unless params[:column].blank?
+    if params[:column].blank?
+      sort_order = 'created_at desc'
+    else
       if params[:column].include? "price"
         sort_order = "price_currency, " + params[:column].gsub(/\+/, " ")
       else
@@ -70,8 +72,10 @@ class ItemsController < ApplicationController
     end
     # filter for selected item type (if applicable)
     unless params[:item_type].blank?
-      if params[:item_type] == 'Main+Pieces'
-        items = items.where('item_type = "One Piece"').or(items.where('item_type = "Jumperskirt"').or(items.where('item_type = "Skirt"')))
+      if params[:item_type] == 'Clothes'
+        items = items.where.not(item_type: ['Houseware', 'e-Mook/Magazine', 'Other'])
+      elsif params[:item_type] == 'Main+Pieces'
+        items = items.where(item_type: ["One Piece", "Jumperskirt", "Skirt"])
       else
         i_type = params[:item_type].gsub(/\+/, " ")
         items = items.where('item_type = ?', i_type)

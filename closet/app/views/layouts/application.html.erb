@@ -56,7 +56,7 @@
       // Gets data from provided reference URL to automatically fill some fields
       function getReflinkData(){
           url = $('#item_ref_url').val();
-          if (url.substr(0, 21) === "https://lolibrary.org") {
+          if (url.substr(0, 25) === "https://www.lolibrary.org") {
               // disable fields while making request
               $('#new_item :input').prop('disabled', true);
               $.ajax({
@@ -104,12 +104,12 @@
 
       function changeImgMode(){
           if ($('#img').prop('checked')){
-              $('.item-contents-container').css({
-                  'min-height': "auto",
-                  'min-width': "auto",
-                  'padding': "10px"
+              $('.item-contents-container').css({'display' : "flex"});
+              $('.item_container').css({
+                'margin' : "5px",
+                'padding' : 0,
+                'justify-content' : "center"
               });
-              $('.item_container').css({'margin': "5px"});
               $('.item_info').hide();
               $('.edit_options').hide();
           }

@@ -73,7 +73,7 @@
       <%= f.label :f_price, 'Price + Shipping, Fees' %><br>
       <%= f.number_field :f_price, :step => 0.01 %>
 
-      <%= f.collection_select :price_currency, Currency.all, :name, :name %>
+      <%= f.collection_select :price_currency, Currency.all, :name, :name, :include_blank => true %>
     </p>
 
     <p>

@@ -6,8 +6,9 @@ $blue: #d1e2ff;
 $gray: #707070;
 
 .items_container{
-  text-align: center;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 h2{
@@ -24,10 +25,13 @@ a{
 }
 
 .item_container{
-  display: inline-block;
-  margin: 15px 10px;
+  margin: 10px 5px;
+  padding: 10px;
   border: 2px solid $blue;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &:hover{
     background-color: #edf4ff;
@@ -40,7 +44,7 @@ a{
 
   .edit_options{
     text-align: right;
-    padding: 0.5em;
+    padding-top: 1em;
   }
 
   .no_img{
@@ -63,11 +67,7 @@ a{
 }
 
 .item-contents-container{
-  min-width: 210px;
   max-width: 330px;
-  min-height: 360px;
-  padding: 15px 15px 0;
-  float: left;
 
   .subtitle{
     font-size: 70%;

@@ -48,7 +48,9 @@
 			</div>
 		<% end %>
     <% if my_page %>
-      <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
+      <% unless @item.price_currency.blank? %>
+        <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
+      <% end %>
       <br>
       <% if @item.p_price %>
         <div>

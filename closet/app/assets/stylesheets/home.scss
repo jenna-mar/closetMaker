@@ -9,18 +9,20 @@
 }
 
 .wardrobe-container{
-  max-width: 500px;
+  max-width: 550px;
   max-height: 500px;
-  border: 2px solid eee;
+  border: 2px solid #eee;
   border-radius: 5px;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  text-align: center;
   margin: 25px 0;
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
 
   .wardrobe-item {
-    display: inline-block;
+    padding: 2px;
     img {
       max-height: 120px;
       // max-width: 100px;
@@ -28,12 +30,12 @@
   }
 
   .no_img_item{
-    height: 70px;
-    padding-top: 50px;
+    height: 120px;
     font-size: 0.8em;
     width: 90px;
     border: 1px solid black;
-    display: inline-block;
+    display: flex;
+    align-items: center;
   }
 }
 

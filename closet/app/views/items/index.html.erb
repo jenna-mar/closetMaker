@@ -36,9 +36,11 @@
 </div>
 
 <div>
-  <%= @items.length %> results found.
+  <%= @items.total_entries %> results found.
 </div>
-
+<!-- This displays pagination navigation -->
+<%= will_paginate @items %>
+<!-- Contain for all item boxes -->
 <div class="items_container">
 <% @items.each do |i| %>
   <div class='item_container'>
@@ -69,7 +71,7 @@
     <% end %>
     <% if my_page %>
       <div class="edit_options">
-          <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+        <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
         <%= link_to 'Delete', user_item_path(current_user, i),
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %>

@@ -4,4 +4,5 @@ class Item < ApplicationRecord
 	has_attached_file :img, validate_media_type: false
 	validates :name, presence: true
 	validates_attachment :img, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+	self.per_page = 50
 end

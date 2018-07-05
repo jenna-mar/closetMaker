@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
     # get items that belong to user we are viewing
-    items = Item.joins(:user).where('users.id = ?', params[:user_id])
+    items = Item.page(params[:page]).joins(:user).where('users.id = ?', params[:user_id])
     sort_order = nil
 
     # order results, default is ASC

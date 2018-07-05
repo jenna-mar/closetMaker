@@ -50,13 +50,14 @@
           }
           else if ($(".options-ha-type").is(':visible')) {
               $(".options-ha-type").hide();
+              $(".options-ha-type").val(""); //reset value in case it was chosen
           }
       });
 
       // Gets data from provided reference URL to automatically fill some fields
       function getReflinkData(){
           url = $('#item_ref_url').val();
-          if (url.substr(0, 25) === "https://www.lolibrary.org") {
+          if (url.substr(0, 21) === "https://lolibrary.org") {
               // disable fields while making request
               $('#new_item :input').prop('disabled', true);
               $.ajax({

@@ -19,3 +19,10 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore images that have been added.
+/closet/public/system/items/imgs/*
+
+# Ignore local database changes.
+
+/closet/db/development.sqlite3

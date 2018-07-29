@@ -1,0 +1,281 @@
+/* line 5, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.user_wardrobe {
+  padding: 15px;
+  width: 550px;
+  float: left;
+}
+
+/* line 11, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobe-container {
+  max-width: 550px;
+  max-height: 500px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  margin: 25px 0;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* line 24, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobe-container .wardrobe-item {
+  padding: 2px;
+}
+/* line 26, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobe-container .wardrobe-item img {
+  max-height: 120px;
+}
+/* line 32, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobe-container .no_img_item {
+  height: 120px;
+  font-size: 0.8em;
+  width: 90px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+/* line 42, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobes_container_container {
+  text-align: center;
+}
+
+/* line 46, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/home.scss */
+.wardrobes_container {
+  display: inline-block;
+}
+/* line 8, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.items_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* line 14, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+h2 {
+  font-size: 1.2em;
+  font-family: sans-serif;
+}
+
+/* line 19, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+a {
+  color: #000;
+  text-decoration: none;
+}
+/* line 22, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+a:visited {
+  color: inherit;
+}
+
+/* line 27, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container {
+  margin: 10px 5px;
+  padding: 10px;
+  border: 2px solid #d1e2ff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* line 36, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container:hover {
+  background-color: #edf4ff;
+  transition: 200ms;
+}
+/* line 41, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container img {
+  height: 200px;
+}
+/* line 45, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container .edit_options {
+  text-align: right;
+  padding-top: 1em;
+}
+/* line 50, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container .no_img {
+  height: 110px;
+  border: 2px solid black;
+  width: 150px;
+  margin: auto;
+  padding-top: 85px;
+}
+/* line 59, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item_container .edit_options a {
+  color: #477bd1;
+}
+
+/* line 65, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.subtitle {
+  color: #707070;
+}
+
+/* line 69, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item-contents-container {
+  max-width: 330px;
+}
+/* line 72, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.item-contents-container .subtitle {
+  font-size: 70%;
+}
+
+/* line 78, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 100px;
+  text-align: center;
+}
+/* line 84, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container img {
+  max-width: 500px;
+}
+/* line 88, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container .notes {
+  padding: 10px 0;
+}
+/* line 92, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container .item-edit-settings {
+  padding: 15px 0;
+}
+/* line 96, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container p {
+  margin: 5px 0;
+}
+/* line 100, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.show_item_container a {
+  color: #477bd1;
+}
+
+/* line 105, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.form_container {
+  text-align: center;
+}
+
+/* line 109, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+.edit_item, .new_item {
+  display: inline-block;
+  text-align: left;
+}
+
+/* line 114, C:/Users/Kurage/Documents/closetMaker/closet/app/assets/stylesheets/items.scss */
+#item_notes {
+  min-width: 300px;
+  min-height: 80px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+.navbar{
+    overflow: hidden;
+    background-color: #d1e2ff;
+    text-align: right;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navbar a{
+    float: left;
+    text-align: center;
+    padding: 25px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.logo{
+    float: left;
+}
+
+.nav-content{
+    float: right;
+    padding-right: 70px;
+}
+
+.dropdown .dropbtn{
+    border: none;
+    outline: none;
+    padding: 25px;
+    background-color: inherit;
+    margin: 0;
+    font-size: 16px;
+}
+
+.dropdown .dropbtn:hover, .navbar .nav-content a:hover{
+    background-color: #477bd1;
+}
+
+.dropbtn::after{
+    content: '▼';
+    font-size: 0.8em;
+}
+
+a.add_new{
+    padding: 8px 20px;
+}
+
+.add_new{
+    border: 2px solid #477bd1;
+    border-radius: 40px;
+    margin: 15px 10px;
+}
+
+.add_new::before{
+    content: '+';
+    font-family: 'Arial';
+    font-weight: bold;
+    padding-right: 0.5em;
+}
+
+.dropdown-content{
+    display: none;
+    position: fixed;
+    min-width: 100px;
+    box-shadow: 0 8px 15px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    background-color: #fff;
+}
+
+.dropdown-content a{
+    float: none;
+    padding: 15px 30px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover{
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+.content-container{
+    margin: 100px 30px 0;
+}
+
+.options-ha-type{
+    display: none;
+}

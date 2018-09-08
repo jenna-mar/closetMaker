@@ -24,7 +24,7 @@
 <div>
   <h3>Sort By</h3>
   <%= select_tag("brand_select", options_for_select([["Enter Another Brand...", "input_brand"]].concat(Brand.all.map{|b| [b.name]}),
-        :selected => params[:brand]), :include_blank => 'All Brands') %>
+        :selected => params[:brand]), class: 'brand-select', :include_blank => 'All Brands') %>
   <%= form_tag(user_items_path, :method => "get") do %>
     <%= text_field_tag(:brand, params[:brand], class: 'brand-text-input', placeholder: "Enter Brand") %>
     <%= select_tag("item_type", options_for_select(type_list_options.map{|t| [t, (t.gsub(/\s+/, "+"))]},

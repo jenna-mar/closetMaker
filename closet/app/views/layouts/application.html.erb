@@ -159,16 +159,15 @@
       $(document).ready(function(){
         changeImgMode();
         brand_text_input = $(".brand-text-input").val();
-        brand_select_input = $("select#brand_select").val();
+        brand_select_input = $("#brand_select").val();
         //case where the selected brand does not appear correctly in the dropdown
         if(brand_select_input === "" && brand_text_input !== ""){
-            $("select#brand_select").val(brand_text_input);
+            $("#brand_select").val(brand_text_input);
             //if it still doesn't exist, then brand is not in the dropdown, show text box
-            if(brand_select_input === ""){
+            if($("#brand_select").val() === null){
               $(".brand-text-input").show();
-              $("select#brand_select").val('input_brand');
+              $("#brand_select").val('input_brand');
             }
-            
         }
       });
   </script>

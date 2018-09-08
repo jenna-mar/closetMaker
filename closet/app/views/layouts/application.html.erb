@@ -4,7 +4,7 @@
     <title>Closet Maker</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -40,10 +40,9 @@
     <%= yield %>
     </div>
   </body>
-  <!-- temporarily put script here. MOVE ASAP -->
+  <!-- temporarily put all script here. TODO: MOVE ASAP -->
   <script>
       // Make hair accessories selector appear when HA option is selected in form(s)
-
       $("select.options-item-type").change(function(){
           if ($(this).find(":selected").text() === "Hair Accessory"){
               $(".options-ha-type").show();
@@ -51,6 +50,26 @@
           else if ($(".options-ha-type").is(':visible')) {
               $(".options-ha-type").hide();
               $(".options-ha-type").val(""); //reset value in case it was chosen
+          }
+      });
+
+      //make brand selection appear when it is selected in form(s)
+      $("select#brand_select").change(function(){
+          brand = $(this).find(":selected").text();
+          if (brand === "Enter Another Brand..."){
+              $(".brand-text-input").val("");
+              $(".brand-text-input").show();
+          }
+          else {
+            if($(this).is(':visible')) {
+              $(".brand-text-input").hide();
+            }
+            if(brand === "All Brands"){
+              $(".brand-text-input").val("");
+            }
+            else {
+              $(".brand-text-input").val(brand); //change brand value to selected option
+            }
           }
       });
 
@@ -64,19 +83,30 @@
                   type: "GET",
                   url: "/requests/autofill/",
                   data: {"url": $('#item_ref_url').val()},
-                  success: function (data) {              
+                  success: function (data) {
+                      //autofill with info received              
                       $('#item_name').val(data.name);
                       $('#item_o_name').val(data.o_name);
-                      $('#item_brand').val(data.brand);
                       $('#item_year').val(data.year);
+                      $('#brand_select').val(data.brand);
+                      $('.brand-text-input').val(data.brand);
+                      
+                      //make brand text input appear if not in the brand selection dropdown
+                      if ($('#brand_select').val() === null){
+                        $('#brand_select').val("input_brand");
+                        $('.brand-text-input').show();
+                      }
 
+                      //make hair accessory type selection show if the right category
                       if (data.item_type === "Hair Accessories") {
                           $('#item_item_type').val("Hair Accessory");
                           $(".options-ha-type").show();
                       }
                       else {
                           $(".options-ha-type").hide();
+                          $(".options-ha-type").val(""); //reset in case something was chosen
 
+                          //adjustment for differences in item type names
                           if (data.item_type === "OP") {
                               $('#item_item_type').val("One Piece");
                           }
@@ -93,7 +123,7 @@
                           else {
                               $('#item_item_type').val(data.item_type);
                           }
-                      }
+                      }                  
 
                       // re-enable fields
                       $('#new_item :input').prop('disabled', false);
@@ -126,6 +156,20 @@
           changeImgMode();
       });
 
-      $(document).ready(changeImgMode());
+      $(document).ready(function(){
+        changeImgMode();
+        brand_text_input = $(".brand-text-input").val();
+        brand_select_input = $("select#brand_select").val();
+        //case where the selected brand does not appear correctly in the dropdown
+        if(brand_select_input === "" && brand_text_input !== ""){
+            $("select#brand_select").val(brand_text_input);
+            //if it still doesn't exist, then brand is not in the dropdown, show text box
+            if(brand_select_input === ""){
+              $(".brand-text-input").show();
+              $("select#brand_select").val('input_brand');
+            }
+            
+        }
+      });
   </script>
 </html>

@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180207100257) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "brands", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20180207100257) do
     t.integer  "user_id"
     t.boolean  "notarrived"
     t.integer  "year"
-    t.index ["user_id"], name: "index_items_on_user_id"
+    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
   create_table "types", force: :cascade do |t|

@@ -42,7 +42,9 @@
     <p>
       <%= f.label :brand %><br>
       <!-- f.collection_select :brand, Brand.all, :id, :name, :include_blank => true -->
-      <%= f.collection_select :brand, Brand.all, :name, :name, :include_blank => true %>
+      <!-- f.collection_select :brand, Brand.all, :name, :name, :include_blank => true -->
+      <%= select_tag("brand_select", options_for_select([["Enter Another Brand...", "input_brand"]].concat(Brand.all.map{|b| [b.name]})), :include_blank => true) %>
+      <%= f.text_field :brand, class: "brand-text-input", placeholder: "Enter Brand" %>
     </p>
 
     <p>

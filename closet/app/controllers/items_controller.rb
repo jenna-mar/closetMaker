@@ -75,7 +75,7 @@ class ItemsController < ApplicationController
       if params[:item_type] == 'Clothes'
         items = items.where.not(item_type: ['Houseware', 'e-Mook/Magazine', 'Other'])
       elsif params[:item_type] == 'Main+Pieces'
-        items = items.where(item_type: ["One Piece", "Jumperskirt", "Skirt"])
+        items = items.where(item_type: ["One Piece", "Jumperskirt", "Skirt", "Set"])
       else
         i_type = params[:item_type].gsub(/\+/, " ")
         items = items.where('item_type = ?', i_type)
@@ -111,14 +111,13 @@ class ItemsController < ApplicationController
     # open URL for scraping
     doc = Nokogiri::HTML(open(url))
 
-    data = doc.css(".list-group-item.attribute .description")
+    data = doc.css(".container")[1]
     # get item attributes
-    # note for name, there is some leading whitespace so we use strip
-    name = doc.css(".text-primary").xpath('text()').to_s.strip
-    o_name = doc.css(".text-muted").xpath('text()').to_s
-    brand = data.css("a")[0].xpath('text()').to_s
-    item_type = data.css("a")[1].xpath('text()').to_s
-    year = data[2].xpath('text()').to_s.to_i
+    name = data.css("h1").xpath('text()').to_s
+    o_name = data.css("h1 .text-muted").xpath('text()').to_s
+    brand = data.css(".list-group-item")[2].xpath('text()').to_s.strip #need to use strip to get rid of leading whitespace
+    item_type = data.css(".list-group-item")[3].xpath('text()').to_s.strip
+    year = data.css("p.m-0 .text-regular")[0].xpath('text()').to_s.to_i
     # return results in json
     results = {name: name, o_name: o_name, brand: brand, item_type: item_type, year: year}
     render json: results

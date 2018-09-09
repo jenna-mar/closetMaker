@@ -1,6 +1,7 @@
 Brand.destroy_all
 Type.destroy_all
 Hacctype.destroy_all
+Jtype.destroy_all
 Currency.destroy_all
 
 Brand.create([{name: 'Angelic Pretty', abbreviation: 'AP'},
@@ -120,6 +121,17 @@ Hacctype.create([{name: 'Headbow'},
 	])
 
 p "Created #{Hacctype.count} hair accessory item types"
+
+Jtype.create([{name: 'Necklace'},
+	{name: 'Bangle'},
+	{name: 'Bracelet'},
+	{name: 'Ring'},
+	{name: 'Choker'},
+	{name: 'Earrings'},
+	{name: 'Brooch'}
+	])
+
+p "Created #{Jtype.count} jewelry item types"
 
 Currency.create([{name: 'JPY', symbol: '¥'},
 	{name: 'USD', symbol: '$'},

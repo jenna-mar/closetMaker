@@ -86,6 +86,10 @@ class ItemsController < ApplicationController
       ha_type = params[:ha_type].gsub(/\+/, " ")
       items = items.where('ha_type = ?', ha_type)
     end
+    # filter for selected jewelry type (if applicable)
+    unless params[:j_type].blank?
+      items = items.where('jewelry_type = ?', params[:j_type])
+    end
     # order results by desired attribute
     if sort_order
       items = items.order(sort_order)
@@ -126,7 +130,7 @@ class ItemsController < ApplicationController
 	private
 		def item_params
 			params.require(:item).permit(:name, :img, :ref_url, :o_name, 
-				:brand, :item_type, :ha_type, :color, :p_price, :f_price,
+				:brand, :item_type, :ha_type, :jewelry_type, :color, :p_price, :f_price,
         :price_currency, :date_p, :date_r, :notes, :notarrived, :year)
     end
 

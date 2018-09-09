@@ -84,5 +84,5 @@ production:
   <<: *default
   database: closet_production
   #add later
-  #username: admin
-  #password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  username: username
+  password: secret

@@ -25,12 +25,15 @@
   <h3>Sort By</h3>
   <%= select_tag("brand_select", options_for_select([["Enter Another Brand...", "input_brand"]].concat(Brand.all.map{|b| [b.name]}),
         :selected => params[:brand]), class: 'brand-select', :include_blank => 'All Brands') %>
+
   <%= form_tag(user_items_path, :method => "get") do %>
     <%= text_field_tag(:brand, params[:brand], class: 'brand-text-input', placeholder: "Enter Brand") %>
     <%= select_tag("item_type", options_for_select(type_list_options.map{|t| [t, (t.gsub(/\s+/, "+"))]},
         :selected => params[:item_type]), :include_blank => 'All Item Types', :class => "options-item-type") %>
     <%= select_tag("ha_type", options_for_select(Hacctype.all.map{|h| [h.name, (h.name.gsub(/\s+/, "+"))]},
         :selected => params[:ha_type]), :include_blank => 'All Hair Accessories', :class => "options-ha-type") %>
+    <%= select_tag("j_type", options_for_select(Jtype.all.map{|j| [j.name, j.name]},
+    :selected => params[:j_type]), :include_blank => 'All Jewelry', :class => "options-j-type") %>
     <%= select_tag("column", options_for_select(sort_options, :selected => params[:column])) %>
     <% if my_page %>
       <br>

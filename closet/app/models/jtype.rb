@@ -1,0 +1,2 @@
+class Jtype < ApplicationRecord
+end

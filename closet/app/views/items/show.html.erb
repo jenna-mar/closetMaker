@@ -35,6 +35,8 @@
 			<%= @item.item_type %>
 			<% if @item.item_type == "Hair Accessory" %>
 					: <%= @item.ha_type %>
+      <%elsif @item.item_type == "Jewelry" %>
+          : <%= @item.jewelry_type %>
 			<% end %>
 		</div>
 		<% if @item.year %>

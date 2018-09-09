@@ -22,3 +22,5 @@
 
 # Ignore images that have been added.
 /public/system/items/imgs/*
+
+/config/secrets.yml

@@ -44,12 +44,23 @@
   <script>
       // Make hair accessories selector appear when HA option is selected in form(s)
       $("select.options-item-type").change(function(){
-          if ($(this).find(":selected").text() === "Hair Accessory"){
+          selected = $(this).find(":selected").text()
+          if (selected === "Hair Accessory"){
               $(".options-ha-type").show();
+          }
+          else if (selected === "Jewelry"){
+            $(".options-j-type").show();
           }
           else if ($(".options-ha-type").is(':visible')) {
               $(".options-ha-type").hide();
               $(".options-ha-type").val(""); //reset value in case it was chosen
+              //different style in forms so do this for now
+              $(".options-ha-type select").val("");
+          }
+          else if ($(".options-j-type").is(':visible')) {
+              $(".options-j-type").hide();
+              $(".options-j-type select").val("");
+              $(".options-j-type").val("");
           }
       });
 
@@ -158,6 +169,14 @@
 
       $(document).ready(function(){
         changeImgMode();
+        //display HA types on load if it is chosen
+        if ($("select.options-item-type").find(":selected").text() === "Hair Accessory"){
+            $(".options-ha-type").show();
+        }
+        else if ($("select.options-item-type").find(":selected").text() === "Jewelry"){
+          $(".options-j-type").show();
+        }
+
         brand_text_input = $(".brand-text-input").val();
         brand_select_input = $("#brand_select").val();
         //case where the selected brand does not appear correctly in the dropdown

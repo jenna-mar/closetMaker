@@ -56,6 +56,10 @@
         <%= f.label :ha_type, 'Hair Accessory Type' %><br>
         <%= f.collection_select :ha_type, Hacctype.all, :name, :name, :include_blank => true %>
       </span>
+      <span class="options-j-type">
+        <%= f.label :jewelry_type, 'Jewelry Type' %><br>
+        <%= f.collection_select :jewelry_type, Jtype.all, :name, :name, :include_blank => true %>
+      </span>
     </p>
 
     <p class="colorway">

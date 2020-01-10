@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180908222621) do
+ActiveRecord::Schema.define(version: 20200110013009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(version: 20180908222621) do
     t.text     "abbreviation"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "color_lists", force: :cascade do |t|
+    t.boolean  "black",      default: false
+    t.boolean  "white",      default: false
+    t.boolean  "ivory",      default: false
+    t.boolean  "red",        default: false
+    t.boolean  "pink",       default: false
+    t.boolean  "orange",     default: false
+    t.boolean  "yellow",     default: false
+    t.boolean  "green",      default: false
+    t.boolean  "blue",       default: false
+    t.boolean  "purple",     default: false
+    t.boolean  "grey",       default: false
+    t.boolean  "brown",      default: false
+    t.boolean  "gold",       default: false
+    t.boolean  "silver",     default: false
+    t.integer  "item_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["item_id"], name: "index_color_lists_on_item_id", using: :btree
   end
 
   create_table "currencies", force: :cascade do |t|
@@ -46,8 +67,8 @@ ActiveRecord::Schema.define(version: 20180908222621) do
     t.date     "date_p"
     t.date     "date_r"
     t.text     "notes"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.decimal  "f_price"
     t.text     "ref_url"
     t.text     "ha_type"
@@ -59,6 +80,7 @@ ActiveRecord::Schema.define(version: 20180908222621) do
     t.boolean  "notarrived"
     t.integer  "year"
     t.string   "jewelry_type"
+    t.boolean  "hidden",           default: false, null: false
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
@@ -82,4 +104,5 @@ ActiveRecord::Schema.define(version: 20180908222621) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "color_lists", "items"
 end

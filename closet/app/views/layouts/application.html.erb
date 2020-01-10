@@ -87,7 +87,7 @@
       // Gets data from provided reference URL to automatically fill some fields
       function getReflinkData(){
           url = $('#item_ref_url').val();
-          if (url.substr(0, 21) === "https://lolibrary.org") {
+          if (url.includes("")) {
               // disable fields while making request
               $('#new_item :input').prop('disabled', true);
               $.ajax({
@@ -167,6 +167,11 @@
           changeImgMode();
       });
 
+      $(".color_search_btn button").click(function(){
+        $(this).parent().hide();
+        $(".color_select").slideDown();
+      })
+
       $(document).ready(function(){
         changeImgMode();
         //display HA types on load if it is chosen
@@ -175,6 +180,11 @@
         }
         else if ($("select.options-item-type").find(":selected").text() === "Jewelry"){
           $(".options-j-type").show();
+        }
+
+        if ($(".color_select").find(":checked").length > 0){
+            $(".color_select").show();
+            $(".color_search_btn").hide();
         }
 
         brand_text_input = $(".brand-text-input").val();

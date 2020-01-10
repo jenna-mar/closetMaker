@@ -1,5 +1,5 @@
 <div class="form_container">
-  <%= form_for [@user, @item] do |f| %>
+  <%= form_for [@user, setup_item(@item)] do |f| %>
    
     <% if @item.errors.any? %>
       <div id="error_e">
@@ -72,6 +72,18 @@
       <%= f.text_field :color %>
     </p>
 
+    <div class="color_list">
+    <%= f.fields_for :color_list do |color_form| %>
+      <% ColorList.column_names[1..-4].each do |n| %>
+        <div>
+          <%= color_form.label n, n.titleize %>
+          <%= color_form.check_box n %>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+
+
     <p>
       <%= f.label :p_price, 'Purchase Price' %><br>
       <%= f.number_field :p_price, :step => 0.01 %><br>
@@ -92,6 +104,11 @@
       <%= f.label :notarrived, 'Not Arrived Yet' %><br>
       <%= f.label :date_r, 'Date Received' %><br>
       <%= f.date_field :date_r %>
+    </p>
+    
+    <p>
+      <%= f.check_box :hidden %>
+      <%= f.label :hidden, 'Private' %><br>
     </p>
 
     <p>

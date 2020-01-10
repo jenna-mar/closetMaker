@@ -42,7 +42,25 @@
     <% end %>
     <br>
     <%= label_tag "img", 'Image-only display'%>
-    <%= check_box_tag("img", '1', params[:img]) %><br>
+    <%= check_box_tag("img", '1', params[:img]) %>
+
+    <div class="color_select">
+      <% ColorList.column_names[1..-4].each do |n| %>
+        <span>
+          <% if params[n] %>
+            <input type="checkbox" name="<%= n %>" id="<%= n %>" checked="<%= params[n] %>" value="<%= params[n] %>">
+          <% else %>
+            <input type="checkbox" name="<%= n %>" id="<%= n %>">
+          <% end %>
+          <%= label_tag n, n.titleize %>
+        </span>
+      <% end %>
+    </div>
+
+    <span class="color_search_btn">
+      <button type="button">Search for colours...</button><br>
+    </span>
+
     <%= submit_tag "Submit", :class => 'submit_sort' %>
   <% end %>
 </div>
@@ -55,40 +73,42 @@
 <!-- Contain for all item boxes -->
 <div class="items_container">
 <% @items.each do |i| %>
-  <div class='item_container'>
-    <%= link_to(user_item_path(@user, i), target: :_blank) do %>
-        <span class="item-contents-container">
-          <% if i.img? %>
-            <%= image_tag i.img.url, :class => 'item_img' %>
-          <% else %>
-            <div class="no_img">
-              <%= i.name %>
-            </div>
-          <% end %>
-          <span class="item_info">
-            <h2>
-              <%= i.name %>
-            </h2>
-            <div>
-              <span class="subtitle">
-                <%= i.o_name %>
-              </span>
-              <br>
-              <%= i.brand %>
-              <br>
-              <%= i.color.titleize %>
-            </div>
+  <% if !i.hidden || (i.hidden && @user == current_user) %>
+    <div class='item_container'>
+      <%= link_to(user_item_path(@user, i), target: :_blank) do %>
+          <span class="item-contents-container">
+            <% if i.img? %>
+              <%= image_tag i.img.url, :class => 'item_img' %>
+            <% else %>
+              <div class="no_img">
+                <%= i.name %>
+              </div>
+            <% end %>
+            <span class="item_info">
+              <h2>
+                <%= i.name %>
+              </h2>
+              <div>
+                <span class="subtitle">
+                  <%= i.o_name %>
+                </span>
+                <br>
+                <%= i.brand %>
+                <br>
+                <%= i.color.titleize %>
+              </div>
+            </span>
           </span>
-        </span>
-    <% end %>
-    <% if my_page %>
-      <div class="edit_options">
-        <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
-        <%= link_to 'Delete', user_item_path(current_user, i),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+      <% if my_page %>
+        <div class="edit_options">
+          <%= link_to 'Edit', edit_user_item_path(current_user, i) %>
+          <%= link_to 'Delete', user_item_path(current_user, i),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 </div>

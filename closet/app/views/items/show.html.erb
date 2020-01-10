@@ -49,11 +49,24 @@
 				<%= @item.color.titleize %>
 			</div>
 		<% end %>
+
+    <div class="col_box_container">
+      <span class="col_title">Colors:</span>
+      <div class="col_boxes"> 
+        <% ColorList.column_names[1..-4].each do |c| %>
+          <% if @item.color_list.read_attribute("#{c}") %>
+            <span class="col_box_<%= c %>">
+              <%= c.titleize %>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
     <% if my_page %>
       <% unless @item.price_currency.blank? %>
         <% item_currency = Currency.where(name: @item.price_currency).first.symbol %>
       <% end %>
-      <br>
       <% if @item.p_price %>
         <div>
           Price paid: <%= item_currency %><%= trim(@item.p_price) %> (<%= @item.price_currency %>)

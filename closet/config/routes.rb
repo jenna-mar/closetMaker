@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'home/index'
 
   resources :users do
-  	resources :items
+  	resources :items do
+      resources :color_list
+    end
   end
 
   root 'home#index'

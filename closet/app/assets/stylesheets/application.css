@@ -109,6 +109,6 @@ a.add_new{
     margin: 100px 30px 0;
 }
 
-.options-ha-type, .brand-text-input, .options-j-type{
+.options-ha-type, .brand-text-input, .options-j-type, .color_select{
     display: none;
 }

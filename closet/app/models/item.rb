@@ -5,4 +5,6 @@ class Item < ApplicationRecord
 	validates :name, presence: true
 	validates_attachment :img, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 	self.per_page = 50
+	has_one :color_list
+	accepts_nested_attributes_for :color_list
 end

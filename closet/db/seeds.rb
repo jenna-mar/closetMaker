@@ -87,6 +87,7 @@ Type.create([{name: 'One Piece', abbreviation: 'OP'},
 	{name: 'Shoes'},
 	{name: 'Houseware'},
 	{name: 'e-Mook/Magazine'},
+	{name: 'Wristwear/Gloves'},
 	{name: 'Accessory (other)'},
 	{name: 'Other'}])
 

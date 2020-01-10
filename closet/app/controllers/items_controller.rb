@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 	def new
 		@user = User.find_by(id: session[:user_id])
 		@item = Item.new
+    @color_list = @item.color_list
 	end
 
 	def create
@@ -42,6 +43,7 @@ class ItemsController < ApplicationController
 	def destroy
 		@user = User.find_by(id: session[:user_id])
 		@item = Item.find(params[:id])
+    @item.color_list.destroy
 		@item.destroy
 
 		redirect_to user_items_path(@user)
@@ -90,6 +92,17 @@ class ItemsController < ApplicationController
     unless params[:j_type].blank?
       items = items.where('jewelry_type = ?', params[:j_type])
     end
+    #filter for selected color
+    query_color_string = ""
+    ColorList.column_names[1..-4].each do |n|
+      unless params[n].blank?
+        query_color_string += "color_lists.#{n} = true OR "
+      end
+    end
+    unless query_color_string.blank?
+      items = items.joins(:color_list).where(query_color_string[0..-4])
+    end
+
     # order results by desired attribute
     if sort_order
       items = items.order(sort_order)
@@ -131,8 +144,9 @@ class ItemsController < ApplicationController
 		def item_params
 			params.require(:item).permit(:name, :img, :ref_url, :o_name, 
 				:brand, :item_type, :ha_type, :jewelry_type, :color, :p_price, :f_price,
-        :price_currency, :date_p, :date_r, :notes, :notarrived, :year)
+        :price_currency, :date_p, :date_r, :notes, :notarrived, :year, :hidden, color_list_attributes: [:id, ColorList.column_names[1..-4]])
     end
+    
 
 		def logged_in_user
 			unless logged_in?
